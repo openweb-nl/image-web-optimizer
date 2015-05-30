@@ -3,7 +3,7 @@
 
   <groupId>nl.openweb.images</groupId>
   <artifactId>image-web-optimizer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
   <name>Image Web Optimizer</name>
@@ -57,7 +57,7 @@
     <connection>scm:git:git@github.com:openweb-nl/image-web-optimizer.git</connection>
     <developerConnection>scm:git:git@github.com:openweb-nl/image-web-optimizer.git</developerConnection>
     <url>https://github.com/openweb-nl/image-web-optimizer</url>
-    <tag>HEAD</tag>
+    <tag>image-web-optimizer-0.0.1</tag>
   </scm>
 
   <distributionManagement>
