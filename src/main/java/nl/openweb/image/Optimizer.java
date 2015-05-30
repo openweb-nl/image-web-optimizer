@@ -3,7 +3,6 @@ package nl.openweb.image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.HashSet;
@@ -55,12 +54,7 @@ public class Optimizer {
     private void optimizeDirectoryRecursively(File src, File target) throws IOException {
         File[] images = src.listFiles(imageFilter);
         for (File image : images) {
-            String extension = extractFileExtension(image.getName());
-            if ("png".equals(extension)) {
-                optimizePngImage(target, image);
-            } else {
-                optimizeImage(target, image);
-            }
+            optimizeImage(target, image);
         }
         File[] subfolders = src.listFiles(directoryFilter);
         for (File subfolder : subfolders) {
@@ -70,7 +64,21 @@ public class Optimizer {
         }
     }
 
-    private void optimizeImage(File target, File image) throws IOException, FileNotFoundException {
+    private void optimizeImage(File target, File image) {
+        try {
+            String extension = extractFileExtension(image.getName());
+            if ("png".equals(extension)) {
+                optimizePngImage(target, image);
+            } else {
+                optimizeNonePngImage(target, image);
+            }
+        } catch (Exception e) {
+            System.err.println("An exception was thrown while processing \"" + image.getAbsolutePath() + "\"");
+            e.printStackTrace();
+        }
+    }
+
+    private void optimizeNonePngImage(File target, File image) throws IOException {
         ImageWriter imageWriter = null;
         try {
             BufferedImage originalImage = ImageIO.read(image);
